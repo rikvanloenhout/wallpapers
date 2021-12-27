@@ -1,2 +1,0 @@
-generate:
-	python main.py

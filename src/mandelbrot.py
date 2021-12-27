@@ -10,19 +10,22 @@ def countIterationsUntilDivergent(c, threshold):
 
         if abs(z) > 4:
             break
-            pass
-        pass
+
     return iteration
 
 # takes the iteration limit before declaring function as convergent and
 # takes the density of the atlas
 # create atlas, plot mandelbrot set, display set
-def mandelbrot(threshold, density):
+def generate(height, width):
+
+    threshold = 120
+    density = 1000
+
     # location and size of the atlas rectangle
     # realAxis = np.linspace(-2.25, 0.75, density)
     # imaginaryAxis = np.linspace(-1.5, 1.5, density)
-    realAxis = np.linspace(-0.22, -0.219, 1000)
-    imaginaryAxis = np.linspace(-0.70, -0.699, 1000)
+    realAxis = np.linspace(-0.22, -0.219, height)
+    imaginaryAxis = np.linspace(-0.70, -0.699, width)
     realAxisLen = len(realAxis)
     imaginaryAxisLen = len(imaginaryAxis)
 
@@ -37,12 +40,5 @@ def mandelbrot(threshold, density):
             c = complex(cx, cy)
 
             atlas[ix, iy] = countIterationsUntilDivergent(c, threshold)
-            pass
-        pass
 
-    # plot and display mandelbrot set
-    # plt.imshow(atlas.T, interpolation="nearest")
-    # plt.show()
-
-# time to party!!
-mandelbrot(120, 1000)
+    return atlas

@@ -1,39 +1,49 @@
-# Python code for Julia Fractal
-from PIL import Image
-   
-# driver function
-if __name__ == "__main__":
-    
-    # setting the width, height and zoom 
-    # of the image to be created
-    w, h, zoom = 1920,1080,1
-   
-    # creating the new image in RGB mode
-    bitmap = Image.new("RGB", (w, h), "white")
-  
-    # Allocating the storage for the image and
-    # loading the pixel data.
-    pix = bitmap.load()
-     
-    # setting up the variables according to 
-    # the equation to  create the fractal
-    cX, cY = -0.7, 0.27015
-    moveX, moveY = 0.0, 0.0
-    maxIter = 255
-   
-    for x in range(w):
-        for y in range(h):
-            zx = 1.5*(x - w/2)/(0.5*zoom*w) + moveX
-            zy = 1.0*(y - h/2)/(0.5*zoom*h) + moveY
-            i = maxIter
-            while zx*zx + zy*zy < 4 and i > 1:
-                tmp = zx*zx - zy*zy + cX
-                zy,zx = 2.0*zx*zy + cY, tmp
-                i -= 1
-  
-            # convert byte to RGB (3 bytes), kinda 
-            # magic to get nice colors
-            pix[x,y] = (i << 21) + (i << 10) + i*8
-  
-    # to display the created fractal
-    # bitmap.show()
+import numpy as np
+import matplotlib.pyplot as plt
+
+def generate(height, width):
+
+    x=0
+    y=0
+    zoom=1
+
+    max_iterations=100
+
+    c=-0.4 + 0.6j
+
+    # To make navigation easier we calculate these values
+    x_width = 1.5
+    y_height = 1.5*height/width
+    x_from = x - x_width/zoom
+    x_to = x + x_width/zoom
+    y_from = y - y_height/zoom
+    y_to = y + y_height/zoom
+
+    # Here the actual algorithm starts
+    x = np.linspace(x_from, x_to, width).reshape((1, width))
+    y = np.linspace(y_from, y_to, height).reshape((height, 1))
+    z = x + 1j * y
+
+    # Initialize z to all zero
+    c = np.full(z.shape, c)
+
+    # To keep track in which iteration the point diverged
+    div_time = np.zeros(z.shape, dtype=int)
+    # To keep track on which points did not converge so far
+    m = np.full(c.shape, True, dtype=bool)
+
+    for i in range(max_iterations):
+        z[m] = z[m]**2 + c[m]
+        m[np.abs(z) > 2] = False
+        div_time[m] = i
+
+    return div_time
+
+
+# plt.imshow(generate(), cmap='magma')
+# # plt.imshow(julia_set(x=0.125, y=0.125, zoom=10), cmap='magma')
+# # plt.imshow(julia_set(c=-0.8j), cmap='magma')
+# # plt.imshow(julia_set(c=-0.8+0.156j, max_iterations=512), cmap='magma')
+# # plt.imshow(julia_set(c=-0.7269 + 0.1889j, max_iterations=256), cmap='magma')
+
+# plt.savefig('images/julia.png')
