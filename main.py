@@ -1,5 +1,7 @@
 import os
 import time
+import sys
+import argparse
 import matplotlib.pyplot as plt
 
 from src import julia
@@ -18,16 +20,27 @@ def generate(module, name, width, height, cmap):
 
 if __name__ == "__main__":
 
+    parser=argparse.ArgumentParser()
+    parser.add_argument('-r', '--resolution', help='resolution, e.g. 1920x1080')
+    parser.add_argument('-c', '--colormap', help='pillow color map name')
+
+    args=parser.parse_args()
+
     width  = 1920
     height = 1080
     cmap = "magma" # viridis, plasma, inferno, gist_rainbow
 
-    width = 3840
-    height = 2160
+    if args.resolution:
+        parts = args.resolution.split("x")
+        width  = parts[0]
+        height = parts[1]
+
+    if args.colormap:
+        cmap = args.colormap
 
     modules = {
-        # "julia":        julia,
-        # "mandelbrot":   mandelbrot,
+        "julia":        julia,
+        "mandelbrot":   mandelbrot,
         "ulam":         ulam
     }
 
