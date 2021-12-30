@@ -26,7 +26,7 @@ def make_spiral(arr):
     return spiral
 
 
-def generate(height, width):
+def generate(width, height):
 
     # Prime numbers up to and including w**2.
     primes = np.array([n for n in range(2,width**2+1) if all((n % m) != 0 for m in range(2,int(np.sqrt(n))+1))])

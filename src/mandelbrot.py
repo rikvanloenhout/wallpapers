@@ -19,13 +19,10 @@ def countIterationsUntilDivergent(c, threshold):
 def generate(height, width):
 
     threshold = 120
-    density = 1000
 
     # location and size of the atlas rectangle
-    # realAxis = np.linspace(-2.25, 0.75, density)
-    # imaginaryAxis = np.linspace(-1.5, 1.5, density)
-    realAxis = np.linspace(-0.22, -0.219, height)
-    imaginaryAxis = np.linspace(-0.70, -0.699, width)
+    realAxis = np.linspace(-2, 1, num=width)
+    imaginaryAxis = np.linspace(-1, 1, num=height)
     realAxisLen = len(realAxis)
     imaginaryAxisLen = len(imaginaryAxis)
 

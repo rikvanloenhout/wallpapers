@@ -12,7 +12,7 @@ def generate(module, name, width, height, cmap):
     dpi = 100
     plt.figure(figsize=(width/dpi, height/dpi), dpi=dpi)
 
-    plt.imshow(module.generate(height, width), cmap=cmap, interpolation='nearest')
+    plt.imshow(module.generate(width, height), cmap=cmap, interpolation='nearest')
     plt.axis('off')
     plt.margins(0,0)
 
@@ -39,9 +39,9 @@ if __name__ == "__main__":
         cmap = args.colormap
 
     modules = {
-        "julia":        julia,
+        # "julia":        julia,
         "mandelbrot":   mandelbrot,
-        "ulam":         ulam
+        # "ulam":         ulam
     }
 
     for name in modules:

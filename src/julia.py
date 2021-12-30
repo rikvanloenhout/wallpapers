@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def generate(height, width):
+def generate(width, height):
 
     x=0
     y=0
