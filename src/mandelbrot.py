@@ -21,8 +21,8 @@ def generate(height, width):
     threshold = 120
 
     # location and size of the atlas rectangle
-    realAxis = np.linspace(-2, 1, num=width)
-    imaginaryAxis = np.linspace(-1, 1, num=height)
+    realAxis = np.linspace(-3, 1, num=width)
+    imaginaryAxis = np.linspace(-2, 2, num=height)
     realAxisLen = len(realAxis)
     imaginaryAxisLen = len(imaginaryAxis)
 

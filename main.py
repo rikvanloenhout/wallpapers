@@ -26,8 +26,8 @@ if __name__ == "__main__":
 
     args=parser.parse_args()
 
-    width  = 1920
-    height = 1080
+    width  = 3840
+    height = 2160
     cmap = "magma" # viridis, plasma, inferno, gist_rainbow
 
     if args.resolution:
@@ -39,9 +39,9 @@ if __name__ == "__main__":
         cmap = args.colormap
 
     modules = {
-        # "julia":        julia,
+        "julia":        julia,
         "mandelbrot":   mandelbrot,
-        # "ulam":         ulam
+        "ulam":         ulam
     }
 
     for name in modules:
